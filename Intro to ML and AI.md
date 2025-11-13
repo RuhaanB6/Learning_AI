@@ -154,88 +154,34 @@ print(mean_absolute_error(val_y, melb_preds))
 
 ### Intro Links
 #### Pandas Documentation 
-```embed
-title: "pandas.DataFrame.dropna — pandas 2.3.3 documentation"
-image: "https://pandas.pydata.org/docs/_static/pandas.svg"
-description: ""
-url: "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dropna.html"
-favicon: ""
-aspectRatio: "40.33333333333333"
-```
+
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dropna.html
 This is the Data manipulation Library which I will be using to play around with data in Python
 #### Skikit Learn 
-```embed
-title: "scikit-learn: machine learning in Python — scikit-learn 1.7.2 documentation"
-image: "https://scikit-learn.org/stable/_images/sphx_glr_plot_classifier_comparison_001_carousel.png"
-description: ""
-url: "https://scikit-learn.org/stable/index.html"
-favicon: ""
-aspectRatio: "31.666666666666664"
-```
+https://scikit-learn.org/stable/index.html
 This is the into Python machine learning library to learn the basics of Machine Learning and AI
 
 #### Andrej Karpathy Neural Network Playlist
-```embed
-title: "Neural Networks: Zero to Hero"
-image: "https://i.ytimg.com/vi/VMj-3S1tku0/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAsbch9qh_yKE5PEvVrJKLFzLfYYQ&days_since_epoch=20405"
-description: ""
-url: "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ"
-favicon: ""
-aspectRatio: "56.25"
-```
+https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
 
 #### 3B1B Neural Network
-```embed
-title: "Neural networks"
-image: "https://i9.ytimg.com/s_p/PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi/landscape_mqdefault.jpg?sqp=CJCd2MgGir7X7AMICNGyiNsFEAE=&rs=AOn4CLDgNnpg5OvoeywdojFDeFM5Bgy5Ew&v=1533155665&days_since_epoch=20405"
-description: "Learn the basics of neural networks and backpropagation, one of the most important algorithms for the modern world."
-url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"
-favicon: ""
-aspectRatio: "56.25"
-```
+https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
 
 #### Neural Network Intro Textbook
-```embed
-title: "Neural networks and deep learning"
-image: "http://neuralnetworksanddeeplearning.com/images/arrow.png"
-description: ""
-url: "http://neuralnetworksanddeeplearning.com"
-favicon: ""
-aspectRatio: "91.45299145299145"
-```
-
+http://neuralnetworksanddeeplearning.com
 ### Models
 
 #### Decision Tree Regressor
 
-```embed
-title: "Decision Tree Regressor, Explained: A Visual Guide with Code Examples | Towards Data Science"
-image: "https://towardsdatascience.com/wp-content/uploads/2024/10/1qTpdMoaZClu-KDV3nrZDMQ.png"
-description: "Trimming branches smartly with Cost-Complexity Pruning"
-url: "https://towardsdatascience.com/decision-tree-regressor-explained-a-visual-guide-with-code-examples-fbd2836c3bef/"
-favicon: ""
-aspectRatio: "52.77777777777778"
-```
+**Decision Tree Regressor Explained**
+https://towardsdatascience.com/decision-tree-regressor-explained-a-visual-guide-with-code-examples-fbd2836c3bef/
 
-```embed
-title: "Understanding Decision Tree Regressor: An In-Depth Intuition"
-image: "https://miro.medium.com/v2/resize:fit:1024/1*bSJ1fhsnbxzyrhARn7qgKw.png"
-description: "Decision Tree Regression: Predictive branching for non-linear relationships"
-url: "https://farshadabdulazeez.medium.com/understanding-decision-tree-regressor-an-in-depth-intuition-a1d3af182efd"
-favicon: ""
-aspectRatio: "56.25"
-```
-
+**Understanding Decision Tree Regressor**
+https://farshadabdulazeez.medium.com/understanding-decision-tree-regressor-an-in-depth-intuition-a1d3af182efd
 #### Random Forest Regressor
 
 A Random Forest Regressor is a learning method used for regression tasks, predicting continuous numerical values. It operates by constructing a multitude of decision trees during training and then averaging their individual predictions to produce a more robust and accurate final prediction.
 
-```embed
-title: "Random Forest Regression | Towards Data Science"
-image: "https://towardsdatascience.com/wp-content/uploads/2022/03/1TegTeL2BoLb6TQvUXnWKKQ-scaled.jpeg"
-description: "A basic explanation and use case in 7 minutes"
-url: "https://towardsdatascience.com/random-forest-regression-5f605132d19d/"
-favicon: ""
-aspectRatio: "150.9433962264151"
-```
+**Random Forest Regression | Towards Data Science**
+https://towardsdatascience.com/random-forest-regression-5f605132d19d/
 
