@@ -148,7 +148,120 @@ melb_preds = forest_model.predict(val_X)
 print(mean_absolute_error(val_y, melb_preds))
 ```
 
-## Kaggle Intermediate Machine Learning
+## Kaggle Intermediate Machine Learning Tutorial
+
+### Review and Setting up a basic model
+
+```python title:Review_And_Doing
+# Importing everything as necessary
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+
+# Setting up the dataframe and making partitions
+X_full = pd.read_csv('../input/train.csv', index_col='Id')
+X_test_full = pd.read_csv('../input/test.csv', index_col='Id')
+
+# Obtain target and predictors
+y = X_full.SalePrice
+features = ['LotArea', 'YearBuilt', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
+X = X_full[features].copy()
+X_test = X_test_full[features].copy()
+# the .copy() makes a copy instead of modifying the original list
+
+# Break off validation set from training data
+X_train, X_valid, y_train, y_valid = train_test_split(X, y, train_size=0.8, test_size=0.2, random_state=0) # Splitting into 80-20 buckets
+
+## Making 5 different model variations on the random tree to find the most
+## Optimal settings
+model_1 = RandomForestRegressor(n_estimators=50, random_state=0)
+model_2 = RandomForestRegressor(n_estimators=100, random_state=0)
+model_3 = RandomForestRegressor(n_estimators=100, criterion='absolute_error', random_state=0)
+model_4 = RandomForestRegressor(n_estimators=200, min_samples_split=20, random_state=0)
+model_5 = RandomForestRegressor(n_estimators=100, max_depth=7, random_state=0)
+
+models = [model_1, model_2, model_3, model_4, model_5]
+
+# Function for comparing different models
+def score_model(model, X_t=X_train, X_v=X_valid, y_t=y_train, y_v=y_valid):
+    model.fit(X_t, y_t)
+    preds = model.predict(X_v)
+    return mean_absolute_error(y_v, preds)
+
+for i in range(0, len(models)):
+    mae = score_model(models[i])
+    print("Model %d MAE: %d" % (i+1, mae))
+```
+***RandomForestRegressor parameters***
+
+**n_estimators**:
+How many independent trees the forest averages over.
+
+The model prediction is:
+
+$$\hat{y}(x) = \frac{1}{T} \sum_{t=1}^T h_t(x)$$
+Variance decreases approximately as:
+$$\mathrm{Var}(\hat{y}) \approx \frac{\sigma^2}{T}$$
+(assuming trees are uncorrelated — in practice they are partially correlated).
+*Conceptually*
+- More trees → lower variance, more stable predictions.  
+- Too few trees → noisy ensemble.  
+- Diminishing returns after ~100–300 trees in many problems.
+
+**random_state**: 
+Seed to make the random decisions
+
+**criterion**:
+The function to measure the quality of a split
+*Common options*: `"squared_error"`, `"absolute_error"`
+
+*Mathematically*  
+- *Squared error* impurity for a node \(S\):
+  
+  $$\text{Impurity}(S) = \sum_{i \in S} (y_i - \bar{y}_S)^2$$
+	Optimizes toward the **mean** of targets in a node.
+
+- *Absolute error* impurity:
+  $$\text{Impurity}(S) = \sum_{i \in S} |y_i - \text{median}(S)|$$
+	Optimizes toward the **median** of targets in a node.
+
+*Conceptually*
+- `"squared_error"` is **sensitive to outliers** (trees will try to reduce large squared residuals).  
+- `"absolute_error"` is **more robust** to outliers (focuses on median behavior).  
+- Changing the criterion changes *which splits* are considered best.
+
+**min_samples_split**:
+The minimum number of samples required to split an internal node
+
+*Mathematically*  
+If node size $|N| < \text{min\_samples\_split}$, the node becomes a leaf and is not split.
+
+*Conceptually*
+- Larger values → **fatter leaves**, fewer splits → **higher bias, lower variance**.  
+- Smaller values (e.g., 2) → allow very deep/small leaves → can overfit noisy data.  
+- Helps regularize trees by preventing splits on tiny sample subsets.
+
+*Best Practice*
+Generally speaking, we like to use 
+$$\sqrt{\# \text{ features}}$$
+
+**max_depth**: 
+The maximum depth of the tree. If ``None``, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+
+*Mathematically*  
+A full binary tree of depth \(d\) can have up to:
+$$2^d \text{ leaves}$$
+Leaves correspond to constant prediction regions; deeper trees allow more complex piecewise-constant functions.
+
+*Conceptually*
+- **Large or None** → very flexible trees, low bias, high variance (risk overfitting).  
+- **Small** → simpler trees, higher bias, lower variance (smoother predictions).  
+- Example: `max_depth=7` → at most \(2^7 = 128\) leaves (much simpler than unconstrained trees).
+
+### Dealing with Missing Values
+
+
 
 ## Useful links
 
