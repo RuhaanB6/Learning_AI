@@ -261,7 +261,7 @@ Leaves correspond to constant prediction regions; deeper trees allow more comple
 
 ### Dealing with Missing Values
 
-
+It makes a lot of intuitive sense regarding why 
 
 ## Useful links
 
