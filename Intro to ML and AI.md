@@ -10,6 +10,11 @@
 - [[#Kaggle Intermediate Machine Learning Tutorial|Kaggle Intermediate Machine Learning Tutorial]]
 	- [[#Kaggle Intermediate Machine Learning Tutorial#Review and Setting up a basic model|Review and Setting up a basic model]]
 	- [[#Kaggle Intermediate Machine Learning Tutorial#Dealing with Missing Values|Dealing with Missing Values]]
+		- [[#Dealing with Missing Values#The 3 Approaches|The 3 Approaches]]
+			- [[#The 3 Approaches#1. Dropping Columns|1. Dropping Columns]]
+			- [[#The 3 Approaches#2. Imputation|2. Imputation]]
+			- [[#The 3 Approaches#2. Imputation++|2. Imputation++]]
+	- [[#Kaggle Intermediate Machine Learning Tutorial#Dealing with Categorical Variables|Dealing with Categorical Variables]]
 - [[#Useful links|Useful links]]
 	- [[#Useful links#Intro Links|Intro Links]]
 		- [[#Intro Links#Pandas Documentation|Pandas Documentation]]
@@ -20,7 +25,6 @@
 	- [[#Useful links#Models|Models]]
 		- [[#Models#Decision Tree Regressor|Decision Tree Regressor]]
 		- [[#Models#Random Forest Regressor|Random Forest Regressor]]
-
 
 
 ## Kaggle Intro to Machine Learning Tutorial
