@@ -7,7 +7,9 @@
 	- [[#Kaggle Intro to Machine Learning Tutorial#Model Validation|Model Validation]]
 	- [[#Kaggle Intro to Machine Learning Tutorial#Underfitting and Overfitting|Underfitting and Overfitting]]
 	- [[#Kaggle Intro to Machine Learning Tutorial#Random Forests|Random Forests]]
-- [[#Kaggle Intermediate Machine Learning|Kaggle Intermediate Machine Learning]]
+- [[#Kaggle Intermediate Machine Learning Tutorial|Kaggle Intermediate Machine Learning Tutorial]]
+	- [[#Kaggle Intermediate Machine Learning Tutorial#Review and Setting up a basic model|Review and Setting up a basic model]]
+	- [[#Kaggle Intermediate Machine Learning Tutorial#Dealing with Missing Values|Dealing with Missing Values]]
 - [[#Useful links|Useful links]]
 	- [[#Useful links#Intro Links|Intro Links]]
 		- [[#Intro Links#Pandas Documentation|Pandas Documentation]]
@@ -18,6 +20,7 @@
 	- [[#Useful links#Models|Models]]
 		- [[#Models#Decision Tree Regressor|Decision Tree Regressor]]
 		- [[#Models#Random Forest Regressor|Random Forest Regressor]]
+
 
 
 ## Kaggle Intro to Machine Learning Tutorial
@@ -261,7 +264,68 @@ Leaves correspond to constant prediction regions; deeper trees allow more comple
 
 ### Dealing with Missing Values
 
-It makes a lot of intuitive sense regarding why 
+It makes a lot of intuitive sense regarding why we would not want to have missing values in the dataset, and therefore it's important to understand how to deal with them as they show up. There's different strategies to go about it, and this section elaborates on the different techniques which are used to deal with such instances and their perks and pitfalls.
+
+#### The 3 Approaches
+##### 1. Dropping Columns
+The simplest option is to drop the column with any missing values. However, as anticipated this leads to extensive data loss. In case where there's a lot of/a majority of a column is missing, this approach may make sense, but imaging completely eliminating a potential feature over one missing value.
+
+```python
+# Get names of columns with missing values
+cols_with_missing = [col for col in X_train.columns
+                     if X_train[col].isnull().any()]
+
+# Drop columns in training and validation data
+reduced_X_train = X_train.drop(cols_with_missing, axis=1)
+reduced_X_valid = X_valid.drop(cols_with_missing, axis=1)
+
+print("MAE from Approach 1 (Drop columns with missing values):")
+print(score_dataset(reduced_X_train, reduced_X_valid, y_train, y_valid))
+```
+##### 2. Imputation
+Imputation fills in the missing values with some number. For instance, we can fill in the mean value along each column. The imputed value won't be exactly right in most cases, but it usually leads to more accurate models than you would get from dropping the column entirely.
+
+```python
+from sklearn.impute import SimpleImputer
+
+# Imputation
+my_imputer = SimpleImputer()
+imputed_X_train = pd.DataFrame(my_imputer.fit_transform(X_train))
+imputed_X_valid = pd.DataFrame(my_imputer.transform(X_valid))
+
+# Imputation removed column names; put them back
+imputed_X_train.columns = X_train.columns
+imputed_X_valid.columns = X_valid.columns
+
+print("MAE from Approach 2 (Imputation):")
+print(score_dataset(imputed_X_train, imputed_X_valid, y_train, y_valid))
+```
+##### 2. Imputation++
+Imputation is the standard approach, and it usually works well. However, imputed values may be systematically above or below their actual values (which weren't collected in the dataset). Or rows with missing values may be unique in some other way. In that case, your model would make better predictions by considering which values were originally missing.
+
+This involves making another column which keeps track of wether the value was initially missing from the dataset or not.
+
+```python
+# Make copy to avoid changing original data (when imputing)
+X_train_plus = X_train.copy()
+X_valid_plus = X_valid.copy()
+
+# Make new columns indicating what will be imputed
+for col in cols_with_missing:
+    X_train_plus[col + '_was_missing'] = X_train_plus[col].isnull()
+    X_valid_plus[col + '_was_missing'] = X_valid_plus[col].isnull()
+
+# Imputation
+my_imputer = SimpleImputer()
+imputed_X_train_plus = pd.DataFrame(my_imputer.fit_transform(X_train_plus))
+imputed_X_valid_plus = pd.DataFrame(my_imputer.transform(X_valid_plus))
+
+# Imputation removed column names; put them back
+imputed_X_train_plus.columns = X_train_plus.columns
+imputed_X_valid_plus.columns = X_valid_plus.columns
+```
+
+### Dealing with Categorical Variables
 
 ## Useful links
 

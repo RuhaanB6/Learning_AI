@@ -1,0 +1,11 @@
+{
+  "workspace:new-tab": [],
+  "obsidian-plugin-toc:create-toc": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "T"
+    }
+  ]
+}
